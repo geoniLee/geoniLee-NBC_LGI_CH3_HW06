@@ -20,8 +20,25 @@ ARotationPlatform::ARotationPlatform()
 		StaticMeshComp->SetStaticMesh(MeshAsset.Object);
 	}
 
+	// 중앙을 기준으로 돌아가도록 pivot 수정
 	StaticMeshComp->SetRelativeLocation(FVector(15, 0, -20));
 	RotationSpeed = 30;
+}
+
+void ARotationPlatform::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (IsRandomLocate) {
+		StartLocation = GetActorLocation();
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle,
+			this,
+			&ARotationPlatform::MoveRandomLocation,
+			3,
+			true
+		);
+	}
 }
 
 // Called every frame
@@ -32,3 +49,8 @@ void ARotationPlatform::Tick(float DeltaTime)
 	AddActorLocalRotation(FRotator(RotationSpeed, 0, 0) * DeltaTime);
 }
 
+void ARotationPlatform::MoveRandomLocation()
+{
+	float RandomVectorX = FMath::RandRange(-300, 300);
+	SetActorLocation(StartLocation + FVector(RandomVectorX, 0, 0));
+}

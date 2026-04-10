@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "TimerManager.h"
 #include "RotationPlatform.generated.h"
 
 UCLASS()
@@ -16,16 +17,23 @@ public:
 	ARotationPlatform();
 
 protected:
-	USceneComponent* SceneRoot;
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* SceneRoot;
 	UStaticMeshComponent* StaticMeshComp;
+	FTimerHandle TimerHandle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
 	float RotationSpeed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
+	bool IsRandomLocate;
+
+	FVector StartLocation;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void MoveRandomLocation();
 };

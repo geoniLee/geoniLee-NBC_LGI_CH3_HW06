@@ -27,12 +27,11 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
 	float MaxRange;
-	
-	int32 Direction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
 	FVector StartPosition;
 
+	int32 Direction;
 
 public:	
 	// Called every frame
