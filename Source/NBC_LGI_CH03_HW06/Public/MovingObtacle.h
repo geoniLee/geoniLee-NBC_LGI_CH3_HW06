@@ -23,9 +23,6 @@ protected:
 	UStaticMeshComponent* StaticMeshComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
-	float RotationSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
 	float MoveSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
@@ -33,7 +30,7 @@ protected:
 	
 	int32 Direction;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Platform|Obtacle")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform|Obtacle")
 	FVector StartPosition;
 
 
