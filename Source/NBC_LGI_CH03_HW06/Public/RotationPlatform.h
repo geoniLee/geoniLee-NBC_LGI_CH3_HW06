@@ -11,10 +11,6 @@ UCLASS()
 class NBC_LGI_CH03_HW06_API ARotationPlatform : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ARotationPlatform();
 
 protected:
 	// Called when the game starts or when spawned
@@ -36,4 +32,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void MoveRandomLocation();
+	ARotationPlatform();
 };

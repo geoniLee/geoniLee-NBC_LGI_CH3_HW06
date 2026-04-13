@@ -8,13 +8,16 @@ ARotationPlatform::ARotationPlatform()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
+	// SceneRoot 생성
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	SetRootComponent(SceneRoot);
 
+	// StaticMesh 생성
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
+	// StaticMesh Asset 지정
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Game/ModularOldTown/Meshes/Decoration_Parts/SM_LionHeadStatue.SM_LionHeadStatue"));
 	if (MeshAsset.Succeeded()) {
 		StaticMeshComp->SetStaticMesh(MeshAsset.Object);
@@ -29,6 +32,7 @@ void ARotationPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// IsRandomLocate은 Editor에서 조정
 	if (IsRandomLocate) {
 		StartLocation = GetActorLocation();
 		GetWorld()->GetTimerManager().SetTimer(
@@ -49,6 +53,7 @@ void ARotationPlatform::Tick(float DeltaTime)
 	AddActorLocalRotation(FRotator(RotationSpeed, 0, 0) * DeltaTime);
 }
 
+// 랜덤 좌표 이동
 void ARotationPlatform::MoveRandomLocation()
 {
 	float RandomVectorX = FMath::RandRange(-300, 300);
